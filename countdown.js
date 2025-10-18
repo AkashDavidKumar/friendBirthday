@@ -1,4 +1,4 @@
-const targetDate = new Date(new Date().getTime() + 15000).getTime(); // 15 sec
+const targetDate = new Date(new Date().getTime() + 5000).getTime(); // 15 sec
 // const targetDate = new Date("2025-10-21T06:00:00+05:30").getTime();
 function updateCountdown() {
   const now = new Date().getTime();

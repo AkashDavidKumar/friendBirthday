@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎁 Birthday Surprise</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="preBirthdayScreen">
+    <div class="dob-container">
+      <h1>🎂 21st October 2005</h1>
+      <p id="countdown">Loading countdown...</p>
+    </div>
+
+    <div class="bubble-background" id="bubbleContainer"></div>
+
+    <div id="unlockSection" class="hidden">
+      <input type="password" id="unlockPass" placeholder="Enter password to unlock" />
+      <button id="unlockBtn">Unlock</button>
+      <p id="unlockStatus"></p>
+    </div>
+
+    <div id="surpriseSection" class="hidden">
+      <h1 class="surprise-text">🎉 Surprise! 🎉</h1>
+      <canvas id="glitterCanvas"></canvas>
+    </div>
+
+    <audio autoplay loop id="bgMusic">
+      <source src="assets/music/soft-bg.mp3" type="audio/mp3">
+    </audio>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB1QpLYnLvAWodaF7saOlefz9TxczEI_x8",
+      authDomain: "birthday-wishe-d39c6.firebaseapp.com",
+      projectId: "birthday-wishe-d39c6",
+      storageBucket: "birthday-wishe-d39c6.firebasestorage.app",
+      messagingSenderId: "769661575117",
+      appId: "1:769661575117:web:62a5f83c7867eeeb7bee84",
+      measurementId: "G-MZWNFEQHKL"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const sendWishBtn = document.getElementById("sendWishBtn");
+    const wishFormContainer = document.getElementById("wishFormContainer");
+    const wisherName = document.getElementById("wisherName");
+    const wishMessage = document.getElementById("wishMessage");
+    const wishStatus = document.getElementById("wishStatus");
+
+    let formVisible = false;
+
+    sendWishBtn.addEventListener("click", async () => {
+      if (!formVisible) {
+        wishFormContainer.classList.remove("hidden");
+        sendWishBtn.textContent = "Submit Wish";
+        formVisible = true;
+        return;
+      }
+
+      wishStatus.textContent = "";
+      const name = wisherName.value.trim();
+      const message = wishMessage.value.trim();
+
+      if (!name || !message) {
+        wishStatus.textContent = "Please fill out both fields.";
+        wishStatus.style.color = "#ff4444";
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, "wishes"), {
+          name,
+          message,
+          timestamp: serverTimestamp()
+        });
+        wishStatus.textContent = "🎉 Wish sent successfully!";
+        wishStatus.style.color = "#ffd700";
+        wisherName.value = "";
+        wishMessage.value = "";
+        sendWishBtn.textContent = "Send Your Wish";
+        formVisible = false;
+        wishFormContainer.classList.add("hidden");
+      } catch (error) {
+        console.error("Error adding wish:", error);
+        wishStatus.textContent = "❌ Failed to send wish.";
+        wishStatus.style.color = "#ff4444";
+      }
+    });
+  </script>
+  <script src="script.js"></script>
+  <!-- <script src="glitter.js"></script> -->
+  <script src="countdown.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<svg width="64" height="128" viewBox="0 0 64 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Candle Body -->
+  <rect x="20" y="48" width="24" height="56" rx="12" fill="#fffbe6" stroke="#e0c080" stroke-width="2"/>
+  <!-- Wax Drip -->
+  <path d="M32 60 Q34 70 32 80 Q30 70 32 60" fill="#f7e7b7" opacity="0.7"/>
+  <!-- Candle Top (melted wax) -->
+  <ellipse cx="32" cy="48" rx="12" ry="6" fill="#fffbe6" stroke="#e0c080" stroke-width="2"/>
+  <ellipse cx="32" cy="52" rx="8" ry="3" fill="#f7e7b7" opacity="0.8"/>
+  <!-- Candle Wick -->
+  <rect x="30.5" y="36" width="3" height="12" rx="1.5" fill="#333"/>
+  <!-- Candle Flame Outer Glow -->
+  <ellipse cx="32" cy="30" rx="10" ry="16" fill="gold" opacity="0.3"/>
+  <!-- Candle Flame Main -->
+  <ellipse cx="32" cy="36" rx="6" ry="12" fill="gold" opacity="0.8"/>
+  <!-- Candle Flame Inner -->
+  <ellipse cx="32" cy="40" rx="2" ry="5" fill="#fff8b0" opacity="0.9"/>
+  <!-- Flame Flicker Highlight -->
+  <ellipse cx="34" cy="32" rx="1" ry="2" fill="#fff" opacity="0.7"/>
+</svg>
+</svg>
+  <ellipse cx="34" cy="20" rx="1" ry="2" fill="#fff" opacity="0.7"/>
+</svg>

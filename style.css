@@ -1,0 +1,281 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
+}
+
+/* DOB + Countdown */
+.dob-container {
+  text-align: center;
+  margin-top: 240px;
+}
+
+.dob-container h1 {
+  font-size: 2.5rem;
+  color: #ffd700;
+}
+
+#countdown {
+  font-size: 1.8rem;
+  margin-top: 10px;
+  color: #fff;
+}
+
+/* Send Wishes Button */
+#sendWishBtn {
+  display: block;
+  margin: 30px auto;
+  padding: 12px 24px;
+  background-color: #ff69b4;
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#sendWishBtn:hover {
+  transform: scale(1.05);
+}
+
+/* Wish Form Styles */
+#wisherName,
+#wishMessage {
+  display: block;
+  margin: 20px auto 10px auto;
+  padding: 12px 16px;
+  width: 90%;
+  max-width: 350px;
+  border: 2px solid #ffd700;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #222;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#wisherName:focus,
+#wishMessage:focus {
+  border-color: #ff69b4;
+}
+
+#wishMessage {
+  min-height: 80px;
+  resize: vertical;
+}
+
+#wishStatus {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #ffd700;
+  min-height: 24px;
+}
+
+/* Bubble Animation */
+.bubble-background {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.bubble {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: floatUp 15s linear infinite;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* Password Section */
+#unlockSection {
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(34, 34, 34, 0.98);
+  padding: 32px 28px 24px 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  text-align: center;
+}
+
+#unlockSection input {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  margin-bottom: 10px;
+}
+
+#unlockBtn {
+  padding: 10px 20px;
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Surprise Text */
+.surprise-text {
+  font-size: 3rem;
+  color: #ff4081;
+  animation: pop 1s ease-in-out forwards;
+  position: fixed;
+  top: 38%;
+  left: 34%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10000;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#glitterCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Hide everything else on surprise mode */
+body.surprise-mode > *:not(#surpriseSection):not(#glitterCanvas) {
+  display: none !important;
+}
+
+/* Utility */
+.hidden {
+  display: none !important;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .surprise-text {
+    font-size: 2.5rem;
+    top: 38%;
+    left: 50%;
+  }
+
+  #unlockSection {
+    width: 90%;
+    padding: 24px;
+  }
+
+  #wisherName,
+  #wishMessage {
+    width: 95%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dob-container {
+    margin-top: 180px;
+  }
+
+  .dob-container h1 {
+    font-size: 2rem;
+  }
+
+  #countdown {
+    font-size: 1.4rem;
+  }
+
+  .surprise-text {
+    font-size: 2rem;
+    top: 35%;
+    left: 50%;
+  }
+
+  #sendWishBtn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  #unlockSection {
+    top: 70%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dob-container {
+    margin-top: 140px;
+  }
+
+  .dob-container h1 {
+    font-size: 1.6rem;
+  }
+
+  #countdown {
+    font-size: 1.2rem;
+  }
+
+  .surprise-text {
+    font-size: 1.6rem;
+    top: 34%;
+    left: 50%;
+  }
+
+  #sendWishBtn {
+    font-size: 0.85rem;
+    padding: 10px 18px;
+  }
+
+  #wisherName,
+  #wishMessage {
+    font-size: 0.95rem;
+    padding: 10px 14px;
+  }
+
+  #unlockSection {
+    top: 65%;
+    padding: 18px;
+  }
+}
+

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Gallery 🎂📸</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: radial-gradient(#ffdde1, #ee9ca7);
+      
+    }
+
+    #gallery {
+      text-align: center;
+      transition: opacity 1s ease-in-out;
+    }
+
+    #gallery.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #gallery h2 {
+      font-size: 2.5rem;
+      margin: 32px 0;
+      color: #ff4081;
+    }
+
+.photo-container {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 20;
+  background: transparent;
+}
+.photo-container img {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1.5px 6px rgba(0,0,0,0.15);
+  /* animation: fadeInPhoto 2s ease-in-out; */
+}
+img{
+  height: 280px;
+  max-height: 78vh;
+  width: 80%;
+  max-width: 400px;
+  object-fit: contain;
+  object-position: center;
+  object-fit: cover;
+  object-position: center;
+  object-fit: fill;
+  object-fit: scale-down;
+  object-fit: none;
+  object-fit: contain;
+  object-fit: cover;
+  object-fit: fill;
+  /* width: 100%;
+  height: auto; */
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1.5px 6px rgba(0,0,0,0.15);
+  animation: shakeDown 1s ease-in-out;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  display: block;
+  transition: transform 0.3s ease;
+  transform: translateY(0);
+  will-change: transform;
+  cursor: pointer;
+}
+/* @keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; } 
+}*/
+@keyframes shakeDown {
+  0% { transform: translateY(-100%) rotate(0deg); opacity: 0; }
+  30% { transform: translateY(0) rotate(2deg); opacity: 1; }
+  60% { transform: translateY(-5px) rotate(-2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+/* @keyframes fadeInPhoto {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+} */
+.cursor {
+  border-right: 3px solid #ff3399;
+  animation: blink-cursor 0.8s steps(1) infinite;
+}
+    .fade-in { animation: fadeInImg 0.7s; }
+    @keyframes fadeInImg { from { opacity: 0; } to { opacity: 1; } }
+    .slide-in { animation: slideInImg 0.7s; }
+    @keyframes slideInImg { from { transform: translateY(60px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .zoom-in { animation: zoomInImg 0.7s; }
+    @keyframes zoomInImg { from { transform: scale(1.2); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    .song-btn {
+      display: inline-block;
+      margin: 24px auto 0 auto;
+      padding: 14px 38px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(90deg, #ff4081 40%, #ffd700 100%);
+      border: none;
+      border-radius: 32px;
+      box-shadow: 0 4px 16px #ff408155;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.2s, opacity 0.5s;
+      outline: none;
+      z-index: 100;
+    }
+    .song-btn:hover, .song-btn:focus {
+      background: linear-gradient(90deg, #ffd700 20%, #ff4081 100%);
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px #ffd70055;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .button-container {
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      #gallery h2, #messageWall h2 {
+        font-size: 1.3rem;
+        margin: 18px 0;
+      }
+      .photo-container img, img.photo {
+        max-width: 98vw;
+        height: auto;
+        min-width: 0;
+        min-height: 0;
+      }
+      .song-btn {
+        font-size: 1rem;
+        padding: 12px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="gallery">
+  <h2>Birthday Baby's Gallery 🎂📸</h2>
+  <div class="photo-container">
+    <img aria-labelledby="photo" src="./assets/images/image1.jpeg" class="photo" id="photo" />
+  </div>
+</div>
+
+<div class="button-container">
+  <button id="playFavoriteBtn" class="song-btn hidden">▶ Play a Favorite Song</button>
+</div>
+
+<audio id="birthdaySong" autoplay loop>
+  <source src="./assets/music/birthday.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="favoriteSong">
+  <source src="./assets/music/favorite.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<script type="module">
+  document.addEventListener('DOMContentLoaded', async function () {
+    const photoEl = document.getElementById('photo');
+    const gallery = document.getElementById('gallery');
+    const birthdaySong = document.getElementById('birthdaySong');
+    const favoriteSong = document.getElementById('favoriteSong');
+    const playFavoriteBtn = document.getElementById('playFavoriteBtn');
+    
+    const photos = [
+      './assets/images/image2.jpeg',
+      './assets/images/image3.jpeg',
+      './assets/images/image4.jpeg',
+      './assets/images/image5.jpeg',
+      './assets/images/image6.jpeg',
+      './assets/images/image7.jpeg',
+      './assets/images/image8.jpeg',
+      './assets/images/image9.jpeg'
+    ];
+
+    let photoIndex = 0;
+
+    function changePhoto() {
+      photoIndex++;
+      if (photoIndex < photos.length) {
+        // Animation logic
+        const anims = ['shakeDown', 'fade-in', 'slide-in', 'zoom-in'];
+        photoEl.classList.remove(...anims);
+        const anim = anims[photoIndex % anims.length]; // Pick a different animation for each image
+        void photoEl.offsetWidth; // force reflow for animation restart
+        photoEl.classList.add(anim);
+        photoEl.src = photos[photoIndex];
+      } else {
+        // ✅ Finished slideshow!
+        // Stop the slideshow interval
+        clearInterval(interval);
+        // Show the button to play the favorite song
+        playFavoriteBtn.classList.remove('hidden');
+      }
+    }
+
+    // ✅ Show each photo for 4 seconds
+    const interval = setInterval(changePhoto, 4000);
+
+    playFavoriteBtn.addEventListener('click', () => {
+      // If favorite song is paused/not started, play it
+      if (favoriteSong.paused) {
+        birthdaySong.pause();
+        favoriteSong.play();
+        playFavoriteBtn.textContent = '⏹ Stop the Song';
+      } else {
+        // If favorite song is playing, stop it and resume birthday song
+        favoriteSong.pause();
+        favoriteSong.currentTime = 0; // Reset for next play
+        birthdaySong.play();
+        playFavoriteBtn.textContent = '▶ Play a Favorite Song';
+      }
+    });
+
+    // When the favorite song ends on its own
+    favoriteSong.addEventListener('ended', () => {
+      birthdaySong.play();
+      playFavoriteBtn.textContent = '▶ Play a Favorite Song';
+    });
+  });
+</script>
+
+
+</body>
+</html>
